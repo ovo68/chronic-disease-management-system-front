@@ -1,0 +1,102 @@
+@import "normalize.css";
+@import "~element-ui/lib/theme-chalk/index.css";
+@import "my-element.css";
+
+body, html {
+    height: 100%;
+    font-family: "Helvetica Neue", Helvetica,
+    "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #666EE8;
+}
+
+.to-flex {
+    display: flex;
+}
+
+.font-pink {
+    color: pink;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.font {
+    font-size: 14px;
+}
+
+.font-change-weight {
+    font-weight: bold;
+}
+
+.font-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.margin-right {
+    margin-right: 10px;
+}
+
+.margin-right-20 {
+    margin-right: 20px;
+}
+
+.margin-left {
+    margin-left: 10px;
+}
+
+.margin-left-20 {
+    margin-left: 20px;
+}
+
+.margin-top {
+    margin-top: 10px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-bottom {
+    margin-bottom: 10px;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.vip {
+    font-weight: bold;
+    color: #FFC71C;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.sn-yellow {
+    color: #FFC71C;
+}

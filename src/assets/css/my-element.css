@@ -1,0 +1,126 @@
+/*
+    侧边栏鼠标移入
+ */
+.el-submenu :hover {
+    background-color: #666EE8;
+}
+
+/**
+    侧边栏项
+ */
+.el-submenu__title {
+    padding: 20px 0 0 0;
+    transition: none;
+    overflow: hidden;
+}
+
+/**
+    侧边栏弹出框内容
+ */
+.el-menu-item {
+    height: 45px;
+    line-height: 45px;
+    color: #ffffff;
+}
+
+.out-title {
+    color: pink;
+    font-size: 15px;
+    position: relative;
+}
+
+/*
+    修改侧边栏弹出框
+ */
+.el-menu--collapse .el-menu .el-submenu, .el-menu--popup {
+    min-width: 100px;
+    background-color: #666EE8;
+}
+
+/*
+    侧边栏弹出紧挨侧边栏
+*/
+.el-menu--popup-right-start {
+    margin: 0;
+}
+
+/*
+    侧边栏弹出框鼠标移入
+ */
+.el-menu--collapse .el-menu .el-submenu, .el-menu--popup :hover {
+
+    background-color: transparent;
+}
+
+/*
+    侧边栏弹出框激活颜色
+ */
+.el-menu-item.is-active {
+    color: aqua;
+}
+
+/**
+    文本区
+ */
+.el-card {
+    border-radius: 20px;
+}
+
+/**
+   设置分页导航背景
+ */
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: pink;
+}
+
+/**
+    日期选择器 相关
+ */
+
+/* 选择日期按钮移入颜色 */
+.el-picker-panel__shortcut:hover {
+    color: pink;
+}
+
+/* 选择日期按钮样式 */
+.el-picker-panel__sidebar {
+
+    padding-top: 10px;
+}
+
+.el-picker-panel__shortcut {
+    padding-left: 28px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/*  鼠标移入日期样式 */
+.el-date-table td.available:hover {
+    color: #666EE8;
+}
+
+/* 鼠标选中日期样式 */
+/*  开始 */
+.el-date-table td.start-date span {
+    background-color: pink;
+    color: #ffffff;
+}
+
+/* 结束 */
+.el-date-table td.end-date span {
+    background-color: pink;
+    color: #ffffff;
+}
+
+/* 今天日期样式 */
+.el-date-table td.today span {
+    color: #666EE8;
+    font-weight: 700;
+}
+
+/* 模态框 */
+.el-dialog__body {
+    padding-top: 0;
+    padding-bottom: 0;
+}

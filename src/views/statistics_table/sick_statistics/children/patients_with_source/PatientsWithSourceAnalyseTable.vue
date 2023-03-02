@@ -1,0 +1,56 @@
+<template>
+  <div>
+    <el-table
+        :data="tableData"
+        border
+        :header-cell-style="{
+                'text-align':'center',
+                'background-color':'#ECF5FF'
+              }"
+        :cell-style="{'text-align':'center'}"
+        style="width: 100%"
+    >
+      <el-table-column
+          prop="id"
+          label="序号"
+          width="80">
+      </el-table-column>
+      <el-table-column
+          prop="friend"
+          label="朋友介绍">
+      </el-table-column>
+      <el-table-column
+          prop="advertising"
+          label="广告">
+      </el-table-column>
+      <el-table-column
+          prop="oneself"
+          label="自来">
+      </el-table-column>
+      <el-table-column
+          prop="sum"
+          label="合计">
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+<script>
+export default {
+  name: "PatientsWithSourceAnalyseTable",
+  data(){
+    return{
+      tableData:[
+        {
+          id:1,
+          friend:20,
+          advertising:20,
+          oneself:20,
+          sum:60
+        }
+      ]
+    }
+  }
+}
+</script>
+<style scoped>
+</style>
