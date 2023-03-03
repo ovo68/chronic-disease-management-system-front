@@ -6,8 +6,8 @@
     </template>
     <el-menu-item-group>
       <span slot="title" class="out-title">社区板块</span>
-      <el-menu-item index="1-1" @click="toBQJL">病情交流</el-menu-item>
-      <el-menu-item index="1-2" @click="toYYJY">医院建议</el-menu-item>
+      <el-menu-item index="1-1" @click="toDiseaseCommunication">病情交流</el-menu-item>
+      <el-menu-item index="1-2" @click="toHospitalRecommendations">医院建议</el-menu-item>
     </el-menu-item-group>
   </el-submenu>
 </template>
@@ -21,11 +21,11 @@ export default {
     }
   },
   methods:{
-    toBQJL(){
-
+    toDiseaseCommunication(){
+      this.$router.push("/CommunityRoot/DiseaseCommunication")
     },
-    toYYJY(){
-
+    toHospitalRecommendations(){
+      this.$router.push("/CommunityRoot/HospitalRecommendations")
     }
 
   }

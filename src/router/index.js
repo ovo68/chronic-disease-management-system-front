@@ -17,6 +17,7 @@ function getAllRouters(modules) {
 }
 
 getAllRouters(require.context('@/routes',true,/\.routes\.js$/))
+// console.log(routes)
 
 const router = new VueRouter({
   routes,

@@ -46,7 +46,7 @@ import SidebarSickManage from "@/components/content/sidebar/children/SidebarSick
 import SidebarDrugManage from "@/components/content/sidebar/children/SidebarDrugManage";
 import SidebarStatisticsTable from "@/components/content/sidebar/children/SidebarStatisticsTable";
 import SidebarSystemSetting from "@/components/content/sidebar/children/SidebarSystemSetting";
-import SidebarTalk from "@/components/content/sidebar/children/SideBarTalk.vue";
+import SidebarTalk from "@/components/content/sidebar/children/SideBarCommunity.vue";
 
 export default {
   name: "Sidebar",

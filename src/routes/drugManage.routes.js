@@ -28,7 +28,7 @@ export default [
         beforeEnter: (to, from, next) => {
           console.log('从哪儿来: ' + from.path)
           console.log('到哪儿去: ' + to.path)
-          window.document.title = '药品调价'
+          window.document.title = '药品调价 '
           store.commit(mutationsTypes.CHANGE_HOME_TITLE, '药品调价')
           next()
         }
