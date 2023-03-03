@@ -24,7 +24,7 @@
       <!-- 8.药品管理-->
       <sidebar-drug-manage/>
       <!--  TODO 加入社区模块    -->
-      <sidebar-talk/>
+      <side-bar-community/>
       <!-- 9.会员管理-->
 <!--      <sidebar-vip-manage/>-->
       <!-- 10.统计报表-->
@@ -46,7 +46,7 @@ import SidebarSickManage from "@/components/content/sidebar/children/SidebarSick
 import SidebarDrugManage from "@/components/content/sidebar/children/SidebarDrugManage";
 import SidebarStatisticsTable from "@/components/content/sidebar/children/SidebarStatisticsTable";
 import SidebarSystemSetting from "@/components/content/sidebar/children/SidebarSystemSetting";
-import SidebarTalk from "@/components/content/sidebar/children/SideBarCommunity.vue";
+import SideBarCommunity from "@/components/content/sidebar/children/SideBarCommunity.vue";
 
 export default {
   name: "Sidebar",
@@ -60,7 +60,7 @@ export default {
     SidebarManageCondition,
     SidebarDrugManage,
     // SidebarVipManage,
-    SidebarTalk,
+    SideBarCommunity,
     SidebarStatisticsTable,
     SidebarSystemSetting,
   },

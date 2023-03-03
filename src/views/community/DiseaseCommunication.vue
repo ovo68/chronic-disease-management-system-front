@@ -65,7 +65,7 @@
 
     <el-row :gutter="10" class="second-row" style="padding-top: 20px">
       <el-col :span="24" class="chart-left">
-        <el-card class="box-card">
+        <el-card class="">
           <div slot="header" class="clearfix">
             <span>问题列表</span>
           </div>
@@ -208,5 +208,8 @@ export default {
 </script>
 
 <style scoped>
-
+.box-card {
+  height: auto;
+  margin-bottom: 20px;
+}
 </style>

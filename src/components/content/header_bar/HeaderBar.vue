@@ -9,12 +9,16 @@
             </div>
          </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>
-          <span>账号资料</span>
-        </el-dropdown-item>
-        <el-dropdown-item>
-          <span>修改密码</span>
-        </el-dropdown-item>
+        <router-link to="/UserInfoRoot/UserInfo" replace>
+          <el-dropdown-item>
+            <span>账号资料</span>
+          </el-dropdown-item>
+        </router-link>
+        <router-link to="/UserInfoRoot/UserInfo" replace>
+          <el-dropdown-item>
+            <span>修改密码</span>
+          </el-dropdown-item>
+        </router-link>
         <el-dropdown-item>
           <span>在线客服</span>
         </el-dropdown-item>

@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "SideBarTalk",
+  name: "SideBarCommunity",
   data() {
     return {
       image9: require('@/assets/image/home/sidebar/home9.png'),
