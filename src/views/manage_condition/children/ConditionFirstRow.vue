@@ -1,12 +1,12 @@
 <template>
   <div>
     <el-row :gutter="10" class="first-row">
-      <el-col :span="8" class="first-row-item">
-        <condition-simple-info
-            :about-condition="registrationCondition.sickNumTrend"
-            :is-up="registrationCondition.sickNumUpDown"
-            :card-title="registrationCondition.getTodaySickNum"/>
-      </el-col>
+<!--      <el-col :span="8" class="first-row-item">-->
+<!--        <condition-simple-info-->
+<!--            :about-condition="registrationCondition.sickNumTrend"-->
+<!--            :is-up="registrationCondition.sickNumUpDown"-->
+<!--            :card-title="registrationCondition.getTodaySickNum"/>-->
+<!--      </el-col>-->
       <el-col :span="8" class="first-row-item">
         <condition-simple-info
             :card-title="meetDoctorCondition.getTodayReceiveSickNum"
@@ -15,14 +15,15 @@
             :about-condition="meetDoctorCondition.receiveSickNumTrend"
             :info-icon="2"/>
       </el-col>
-      <el-col :span="8" class="first-row-item">
-        <condition-simple-info
-            :card-title="incomeCondition.income"
-            describe="今日收入合计"
-            :is-up="incomeCondition.incomeUpDown"
-            :about-condition="incomeCondition.incomeTrend"
-            :info-icon="3"/>
-      </el-col>
+
+<!--      <el-col :span="8" class="first-row-item">-->
+<!--        <condition-simple-info-->
+<!--            :card-title="incomeCondition.income"-->
+<!--            describe="今日收入合计"-->
+<!--            :is-up="incomeCondition.incomeUpDown"-->
+<!--            :about-condition="incomeCondition.incomeTrend"-->
+<!--            :info-icon="3"/>-->
+<!--      </el-col>-->
 <!--      <el-col class="first-row-item" :span="6">-->
 <!--        <condition-simple-info-->
 <!--            :card-title="vipCondition.getTodayNewvipNum"-->

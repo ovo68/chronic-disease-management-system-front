@@ -2,8 +2,8 @@
 <template>
   <div>
     <condition-first-row :conditions="todayCondition"/>
-    <condition-second-row
-        :vip-consume-data="vipPercent"/>
+<!--    <condition-second-row-->
+<!--        :vip-consume-data="vipPercent"/>-->
     <condition-third-row
         :table-data="allOutpatientServiceRecord"/>
   </div>
