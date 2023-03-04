@@ -26,13 +26,13 @@
         :is-disabled="true" class="move-down" v-if="showRegistrationDate"
         :input-value-from-parent="getRegistrationDate"
         slot="three-col">
-      <sn-text text="挂号日期" slot="title"/>
+      <sn-text text="就诊日期" slot="title"/>
     </sn-input>
     <sn-input
         :is-disabled="true" class="move-down" v-if="showRegistrationWorker"
         :input-value-from-parent="getRegistrationWorker"
         slot="four-col">
-      <sn-text text="挂号员" slot="title"/>
+      <sn-text text="记录员" slot="title"/>
     </sn-input>
   </sn-row-has-four-col>
 </template>

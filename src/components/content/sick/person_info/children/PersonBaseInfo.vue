@@ -2,99 +2,48 @@
   <sn-card-with-title>
     <div slot="title">
       <sn-title
-          title="基本信息"
+          title="诊断信息"
           :title-style="titleStyle"/>
     </div>
     <div slot="content">
       <sn-row-has-four-col>
-        <sn-input-with-advice
-            :is-disabled="isDisabledEditPersonInfo"
-            @handleSelect="getSickInfo"
+        <sn-input
             @inputChange="getSickName"
-            :input-value="sick.name"
-            :select-data="allSicks"
+            :input-value-from-parent="sick.name"
             slot="one-col"
             ref="name">
-          <sn-must-text
-              slot="title"
-              text="患者姓名"/>
-        </sn-input-with-advice>
-        <sn-input
-            :is-disabled="true"
-            :input-value-from-parent="vipNumber"
-            slot="two-col"
-            ref="sickId">
-          <sn-must-text
-              slot="title"
-              text="患者卡号"/>
+          <sn-must-text text="患者姓名" slot="title"/>
         </sn-input>
         <sn-input-complex
-            :is-disabled="isDisabledEditPersonInfo"
             @inputChange="getSickAge"
             @selectChange="getSickAgeUnit"
             :choose-item="$store.state.age"
             :input-value="sick.age"
-            slot="three-col"
+            slot="two-col"
             ref="age">
           <sn-must-text
               slot="title"
               text="患者年龄"/>
         </sn-input-complex>
-        <sn-date-picker
-            :is-disabled="isDisabledEditPersonInfo"
-            @dateChange="getBirthday"
-            :date-from-parent="sick.birthday"
-            slot="four-col"
-            ref="birth">
-          <sn-must-text slot="title" text="出生日期"/>
-        </sn-date-picker>
-      </sn-row-has-four-col>
-      <sn-row-has-four-col>
         <sn-select
-            :disabled-select="isDisabledEditPersonInfo"
             @selectChange="getSickGender"
             :to-select="sick.gender.value"
-            slot="one-col"
+            slot="three-col"
             :select-data="$store.state.gender"
             ref="gender">
           <sn-must-text text="性别" slot="title"/>
         </sn-select>
         <sn-input
-            :is-disabled="isDisabledEditPersonInfo"
             @inputChange="getSickPhoneNumber"
             :input-value-from-parent="sick.phoneNumber"
-            slot="two-col"
+            slot="four-col"
             ref="phoneNumber">
           <sn-must-text text="手机号码" slot="title"/>
         </sn-input>
-        <sn-input
-            :is-disabled="isDisabledEditPersonInfo"
-            @inputChange="getIdCard"
-            :input-value-from-parent="sick.idCard"
-            slot="three-col">
-          <sn-must-text text="证件号码" slot="title"/>
-        </sn-input>
       </sn-row-has-four-col>
-      <sn-row-has-two-col>
-        <sn-select
-            :disabled-select="isDisabledEditPersonInfo"
-            @selectChange="getVipType"
-            :to-select="sick.level"
-            slot="one-col"
-            :select-data="$store.state.vipType">
-          <sn-must-text text="会员类型" slot="title"/>
-        </sn-select>
-        <sn-date-picker
-            :is-disabled="isDisabledEditPersonInfo"
-            @dateChange="getDueDate"
-            :date-from-parent="sick.dueDate"
-            slot="two-col">
-          <sn-must-text text="到期时间" slot="title"/>
-        </sn-date-picker>
-      </sn-row-has-two-col>
+
       <sn-row-has-two-col class="margin-top-20">
         <sn-select-has-select
-            :is-disabled="isDisabledEditPersonInfo"
             :select-value="sick.addressArray"
             :options="$store.state.address"
             @selectChange="getAddress"
@@ -102,22 +51,34 @@
           <sn-must-text text="地址" slot="title"/>
         </sn-select-has-select>
         <sn-input
-            :is-disabled="isDisabledEditPersonInfo"
-            :input-value-from-parent="sick.addressDetail"
-            @inputChange="getDetailAddress"
+            :input-value-from-parent="sick.useDrugInfo"
+            @inputChange="getUseDrugInfo"
             slot="two-col">
           <sn-must-text
-              text="详细地址" slot="title"/>
+              text="用药信息" slot="title"/>
         </sn-input>
       </sn-row-has-two-col>
-      <sn-row-has-two-col :left=12 :right=12 v-if="isShowDiagnose">
-        <sn-select-create-item slot="one-col" :options="$store.state.diagnoseData">
-          <sn-must-text text="诊断" slot="title"/>
-        </sn-select-create-item>
-        <sn-select-create-item slot="two-col" :options="$store.state.doctorAdviceData">
+      <sn-row-has-two-col :left=12 :right=12>
+        <sn-input
+            :input-value-from-parent="sick.addressDetail"
+            @inputChange="getDetailAddress"
+            slot="one-col">
+          <sn-must-text
+              text="体检信息" slot="title"/>
+        </sn-input>
+        <sn-select-create-item slot="two-col" @selectedChange="getDoctorAdvice"
+                               :options="$store.state.doctorAdviceData">
           <sn-must-text text="医嘱" slot="title"/>
         </sn-select-create-item>
       </sn-row-has-two-col>
+
+      <div class="to-flex" style="margin-top: 12px">
+        <el-button
+            type="primary"
+            plain @click="submitSickInfo">
+          <sn-text text="提交"/>
+        </el-button>
+      </div>
     </div>
   </sn-card-with-title>
 </template>
@@ -129,25 +90,19 @@ export default {
     return {
       //是否显示诊断信息
       isShowDiagnose: true,
-      //患者编号
-      vipNumber: this.$store.state.user.id + new Date().getTime(),
+
       sick: {
         gender: {
           value: 0,
           label: '男'
         },
-        level: 0,
         addressArray: [],
-        address: '',
-        vipNumber: '',
         name: '',
         age: '',
-        birthday: '',
         phoneNumber: '',
-        idCard: '',
-        dueDate: '',
-        addressDetail: '',
-        vip: ''
+        useDrugInfo: '',
+        doctorAdvices: [],
+        doctor: '',
       },
       titleStyle: {
         'color': '#21A3F1',
@@ -156,14 +111,22 @@ export default {
     }
   },
   methods: {
-    //获取患者信息
-    getSickInfo(sick) {
-      this.sick = sick
-      this.vipNumber = sick.vipNumber
-      this.$set(this.sick, 'level', sick.vip.level)
-      this.$set(this.sick, 'address', this.myUtils.splitString(sick.address + '', ','))
-      this.$set(this.sick, 'addressArray', sick.address)
+    submitSickInfo() {
+      this.sick.doctor = this.$store.state.user.username
+      console.log(this.$refs.age);
+      console.log(this.sick);
+
+      //  TODO 发请求保存信息
     },
+
+    getUseDrugInfo(drug) {
+      this.$set(this.sick, 'useDrugInfo', drug)
+    },
+    getDoctorAdvice(advices) {
+      this.$set(this.sick, 'doctorAdvices', advices)
+    },
+
+
     //获取患者姓名
     getSickName(name) {
       this.$set(this.sick, 'name', name)
@@ -251,5 +214,7 @@ export default {
 </script>
 
 <style scoped>
-
+.el-button {
+  width: 100%;
+}
 </style>

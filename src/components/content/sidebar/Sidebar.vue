@@ -10,27 +10,35 @@
       <!-- 1.经营概况-->
       <sidebar-manage-condition/>
       <!-- 2.工作台-->
-      <sidebar-workspace/>
+<!--      <sidebar-workspace/>-->
       <!-- 3.新开就诊-->
-      <sidebar-new-see-doctor/>
+<!--      <sidebar-new-see-doctor/>-->
       <!-- 4.挂号管理-->
-      <sidebar-registration-manage/>
+      <sidebar-registration-manage v-show="$store.state.user.role===1"/>
+
+<!-- 病人挂号记录     -->
+      <side-bar-sick-registration-record/>
+
       <!-- 5.药品零售-->
-      <sidebar-drug-sale/>
+<!--      <sidebar-drug-sale/>-->
       <!-- 6.收费管理-->
-      <sidebar-cost-manage/>
+<!--      <sidebar-cost-manage/>-->
       <!-- 7.患者管理-->
-      <sidebar-sick-manage/>
+<!--      <sidebar-sick-manage/>-->
       <!-- 8.药品管理-->
-      <sidebar-drug-manage/>
+<!--      <sidebar-drug-manage/>-->
       <!--  TODO 加入社区模块    -->
       <side-bar-community/>
+
+<!--  医院建议    -->
+      <side-bar-recommendation/>
+
       <!-- 9.会员管理-->
 <!--      <sidebar-vip-manage/>-->
       <!-- 10.统计报表-->
-      <sidebar-statistics-table/>
+<!--      <sidebar-statistics-table/>-->
       <!-- 11.系统设置-->
-      <sidebar-system-setting/>
+<!--      <sidebar-system-setting/>-->
     </el-menu>
   </div>
 </template>
@@ -47,10 +55,14 @@ import SidebarDrugManage from "@/components/content/sidebar/children/SidebarDrug
 import SidebarStatisticsTable from "@/components/content/sidebar/children/SidebarStatisticsTable";
 import SidebarSystemSetting from "@/components/content/sidebar/children/SidebarSystemSetting";
 import SideBarCommunity from "@/components/content/sidebar/children/SideBarCommunity.vue";
+import SideBarRecommendation from "@/components/content/sidebar/children/SideBarRecommendation";
+import SideBarSickRegistrationRecord from "@/components/content/sidebar/children/SideBarSickRegistrationRecord";
 
 export default {
   name: "Sidebar",
   components: {
+    SideBarSickRegistrationRecord,
+    SideBarRecommendation,
     SidebarSickManage,
     SidebarCostManage,
     SidebarDrugSale,

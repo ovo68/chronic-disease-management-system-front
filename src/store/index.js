@@ -17,6 +17,8 @@ const state = {
   user: {
     id: '1',
     username: "忆生",
+    // 角色  0 病人  ； 1 医生
+    role: 1
   },
   //性别
   gender: [
@@ -103,14 +105,14 @@ const state = {
       label: '岁',
       value: 0
     },
-    {
-      label: '月',
-      value: 1
-    },
-    {
-      label: '天',
-      value: 2
-    },
+    // {
+    //   label: '月',
+    //   value: 1
+    // },
+    // {
+    //   label: '天',
+    //   value: 2
+    // },
   ],
   //地址
   address: [

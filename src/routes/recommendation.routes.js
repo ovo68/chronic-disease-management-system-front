@@ -4,22 +4,22 @@ import * as mutationsTypes from '@/store/mutations-types'
 
 export default [
   {
-    path: '/CommunityRoot',
-    component: () => import('@/components/content/module_roots/CommunityRoot'),
+    path: '/RecommendationRoot',
+    component: () => import('@/components/content/module_roots/RecommendationRoot'),
     children: [
-      // 1.病情交流
+      // 医院建议
       {
-        path: 'DiseaseCommunication',
-        component: () => import('@/views/community/DiseaseCommunication'),
+        path: 'NewDrugVolunteer',
+        component: () => import('@/views/recommendation/NewDrugVolunteer'),
         beforeEnter: (to, from, next) => {
           console.log('从哪儿来: ' + from.path)
           console.log('到哪儿去: ' + to.path)
-          window.document.title = '病情交流'
-          store.commit(mutationsTypes.CHANGE_HOME_TITLE, '病情交流')
+          window.document.title = '新药志愿者'
+          store.commit(mutationsTypes.CHANGE_HOME_TITLE, '新药志愿者')
           next()
         }
       },
-      // 2.医院建议
+      // 医院建议
       {
         path: 'HospitalRecommendations',
         component: () => import('@/views/recommendation/HospitalRecommendations'),

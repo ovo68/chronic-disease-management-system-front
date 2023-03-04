@@ -4,6 +4,7 @@
       <slot name="title"/>
     </div>
     <el-select
+        @change="selectedChange"
         v-model="selectValue"
         multiple
         filterable
@@ -29,6 +30,12 @@ export default {
       selectValue: ''
     }
   },
+  methods:{
+    selectedChange(){
+      this.$emit('selectedChange', this.selectValue)
+    }
+  }
+  ,
 
   watch: {
     toSelect(val) {

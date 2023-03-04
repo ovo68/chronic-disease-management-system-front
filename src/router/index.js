@@ -11,6 +11,7 @@ VueRouter.prototype.push = function push(location) {
 }
 
 function getAllRouters(modules) {
+  // TODO 判断登录用户角色，过滤路由
   modules.keys().forEach((key) => {
     routes = routes.concat(modules(key).default);
   })

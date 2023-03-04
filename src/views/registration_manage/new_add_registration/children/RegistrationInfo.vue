@@ -1,7 +1,7 @@
 <template>
   <sn-card-with-title>
     <div slot="title">
-      <sn-title title="挂号信息" :title-style="titleStyle"/>
+      <sn-title title="就诊信息" :title-style="titleStyle"/>
     </div>
     <div slot="content">
       <registration-info-first-row

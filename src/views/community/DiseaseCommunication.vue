@@ -1,5 +1,66 @@
 <template>
   <div>
+    <el-row :gutter="10" class="second-row" style="padding-bottom: 30px">
+      <el-col :span="24" class="chart-left">
+        <el-card class="">
+          <div slot="header" class="clearfix">
+            <span>新药推荐</span>
+          </div>
+          <el-table
+              :data="recommendedDrugList"
+              border
+              style="width: 100%">
+            <el-table-column
+                fixed
+                prop="diseaseName"
+                label="病名">
+            </el-table-column>
+            <el-table-column
+                fixed
+                prop="recommendedDrug"
+                width="300"
+                label="推荐药物">
+            </el-table-column>
+            <el-table-column
+                fixed
+                prop="recommendationIndex"
+                width="250"
+                label="推荐指数">
+              <template slot-scope="scope">
+                <el-rate
+                    v-model="scope.row.recommendationIndex"
+                    disabled
+                    text-color="#ff9900"
+                    score-template="{value}">
+                </el-rate>
+              </template>
+            </el-table-column>
+          </el-table>
+
+
+        </el-card>
+      </el-col>
+      <el-dialog
+          title="回复"
+          :visible.sync="centerDialogVisible"
+          width="30%"
+          center>
+        <el-tag>问题描述</el-tag>
+        <span>{{ this.needAnswerQuestion !== null ? this.needAnswerQuestion.description : '' }}</span>
+        <div>
+          <el-tag>您的回答</el-tag>
+        </div>
+        <el-input type="textarea" v-model="needAnswerQuestionAnswer.answerContent" maxlength="500" show-word-limit
+                  resize="none"
+                  :rows="5" class="textarea-box"></el-input>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="()=>{this.centerDialogVisible = false;this.needAnswerQuestion = null}">取 消</el-button>
+          <el-button type="primary" @click="confirmReply">确 定</el-button>
+        </span>
+      </el-dialog>
+    </el-row>
+
+
     <el-row :gutter="10" class="first-row">
       <el-col :span="8" class="first-row-item">
         <el-card class="box-card">
@@ -133,6 +194,10 @@ export default {
       questionList: [
         {questionId: '1', description: "吃糖多对身体有什么危害?", user: 'u01'},
         {questionId: '2', description: "经常吃面包对身体会有什么影响？", user: 'u02'}
+      ],
+      recommendedDrugList: [
+        {diseaseName: "糖尿病", recommendedDrug: "胰岛素", recommendationIndex: 3},
+        {diseaseName: "夜盲症", recommendedDrug: "维生素A", recommendationIndex: 5},
       ],
       // 当前用户自己提出的问题列表
       currentUserQuestionList: [

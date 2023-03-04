@@ -1,22 +1,10 @@
 <!--  新增挂号  -->
 <template>
   <div>
-    <collect-money-dialog
-        ref="collectMoneyDialog"
-        :cost="cost"
-        @ensure="getCostData"
-        @collectionMoney="collectionMoney"
-        slot="title"
-        class="margin-bottom-20"/>
-    <div slot="content">
-      <registration-info
-          ref="registrationInfo"
-          class="margin-bottom-20"/>
-      <person-info
-          ref="personInfo"
-          :vip-number="$store.state.user.id + new Date().getTime()"
-          :all-sicks="allVipSicks"
-          :show-family="false"/>
+    <div>
+      <person-base-info
+          :is-disabled-edit-person-info="true"
+          ref="personBaseInfo"/>
     </div>
   </div>
 </template>
@@ -27,6 +15,7 @@ import CollectMoneyDialog
 import PersonInfo from "@/components/content/sick/person_info/PersonInfo";
 import RegistrationInfo
   from "@/views/registration_manage/new_add_registration/children/RegistrationInfo";
+import PersonBaseInfo from "@/components/content/sick/person_info/children/PersonBaseInfo";
 
 //导入api
 import {getAllVipSicks} from "@/api/registration_manage/registrationManage";
@@ -54,7 +43,8 @@ export default {
   components: {
     PersonInfo,
     CollectMoneyDialog,
-    RegistrationInfo
+    RegistrationInfo,
+    PersonBaseInfo
   },
   methods: {
 
@@ -67,13 +57,14 @@ export default {
     getCostData(costData) {
       console.log(costData)
     },
-    //进行收费
+    //进行收费 TODO 提交病人就诊信息
     collectionMoney() {
       //1.获取挂号信息组件
       let registrationInfo = this.$refs.registrationInfo
 
       //2.获取挂号信息组件的第一行
       let first = registrationInfo.$refs.first
+      console.log(first)
 
       //3.获取挂号信息组件的第二行
       let second = registrationInfo.$refs.second
@@ -81,6 +72,7 @@ export default {
       //4.对象解构
       const {department, diagnoseType, diagnoseDoctor} = first.getFirstRowData()
       const {registrationCost, therapyCost} = second.getSecondRowData()
+      console.log(second)
 
       //5.获取挂号信息
       this.registrationInfo = new RegistrationInfoObject(
@@ -105,7 +97,18 @@ export default {
       //6. 获取当前患者信息
       this.currentSick = this.$refs.personInfo.getSickBaseInfo()
 
-      const {name, vipNumber, age, birthday, phoneNumber, idCard, dueDate, address, addressDetail, vip} = this.currentSick
+      const {
+        name,
+        vipNumber,
+        age,
+        birthday,
+        phoneNumber,
+        idCard,
+        dueDate,
+        address,
+        addressDetail,
+        vip
+      } = this.currentSick
 
       //7.判断是否填写患者信息
       if (name === undefined || name === '' ||
@@ -159,5 +162,27 @@ export default {
 <style scoped>
 .pay {
   text-align: right;
+}
+
+.el-button {
+  width: 100%;
+}
+
+.move-down {
+  position: relative;
+  top: 12px;
+}
+
+.move-up {
+  position: relative;
+  bottom: 10px;
+}
+
+.actual-money {
+  margin-left: 53px;
+}
+
+/deep/ .el-dialog__body {
+  padding-bottom: 0;
 }
 </style>

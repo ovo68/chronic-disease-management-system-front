@@ -1,9 +1,10 @@
 <!-- 挂号记录 -->
 <template>
   <sn-card-with-title>
-    <registration-record-title slot="title"/>
+<!--    <registration-record-title slot="title"/>-->
     <div slot="content">
-      <find-info-from-table/>
+
+<!--      <find-info-from-table/>-->
       <registration-info-table :table-data="registrationInfoTableData"/>
     </div>
   </sn-card-with-title>
@@ -25,55 +26,45 @@ export default {
   },
   data() {
     return {
-
-      buttonNames: ['未就诊', '已就诊', '已退号'],
-
       registrationInfoTableData: [
         {
           id: 1,
-          registrationId: '12166565123',
           name: '陈平安',
           sex: '男',
           age: 12,
-          phoneNumber: '451125421',
-          department: '全科',
+          phoneNumber: '1333221231',
           doctor: '宁姚',
           meetDoctorDate: '1996-12-25 12:05:12',
-          needMoney: 12.03,
-          actualMoney: 12.03,
-          meetDoctorStatus: '未就诊',
         },
         {
-          id: 1,
-          registrationId: '12166565123',
-          name: '陈平安',
+          id: 2,
+          name: '石昊',
           sex: '男',
-          age: 12,
-          phoneNumber: '451125421',
-          department: '全科',
-          doctor: '宁姚',
+          age: 33,
+          phoneNumber: '1345575676',
+          doctor: '王阳明',
           meetDoctorDate: '1996-12-25 12:05:12',
-          needMoney: 12.03,
-          actualMoney: 12.03,
-          meetDoctorStatus: '已就诊',
         },
         {
-          id: 1,
-          registrationId: '12166565123',
-          name: '陈平安',
+          id: 3,
+          name: '叶凡',
           sex: '男',
-          age: 12,
-          phoneNumber: '451125421',
-          department: '全科',
+          age: 22,
+          phoneNumber: '1453345325',
           doctor: '宁姚',
           meetDoctorDate: '1996-12-25 12:05:12',
-          needMoney: 12.03,
-          actualMoney: 12.03,
-          meetDoctorStatus: '已退号',
         },
       ],
     }
   },
+  methods:{
+    initAllRegistrationInfoTableData(){
+      // TODO 发请求拿就诊病人数据数据
+    }
+  },
+  created() {
+    this.initAllRegistrationInfoTableData()
+  }
 }
 </script>
 

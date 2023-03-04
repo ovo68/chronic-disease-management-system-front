@@ -59,6 +59,8 @@ export default {
       this.$router.replace("/register")
     },
     userLogin(){
+      // TODO 发送登录请求
+
       this.$store.commit(this.mutationsTypes.CHANGE_HOME_TITLE,'经营概况')
       this.$router.replace("/manageConditionRoot")
     }

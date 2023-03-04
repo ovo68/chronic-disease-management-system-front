@@ -1,17 +1,17 @@
-<template>
+<template>    <div class="to-flex">
+  <el-button
+      type="danger"
+      plain @click="collectMoney">
+    <sn-text text="提交"/>
+  </el-button>
+  <el-button
+      type="primary"
+      plain @click="returnUp">
+    <sn-text text="返回"/>
+  </el-button>
+</div>
   <div class="text-right margin-bottom">
-    <div class="to-flex">
-      <el-button
-          type="danger"
-          plain @click="collectMoney">
-        <sn-text text="收费"/>
-      </el-button>
-      <el-button
-          type="primary"
-          plain @click="returnUp">
-        <sn-text text="返回"/>
-      </el-button>
-    </div>
+
     <el-dialog
         :close-on-click-modal="false"
         title="收费"
