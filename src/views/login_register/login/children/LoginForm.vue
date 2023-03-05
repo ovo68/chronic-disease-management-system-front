@@ -17,8 +17,8 @@
           <el-input v-model="password" placeholder="请输入密码" show-password class="input">
             <i slot="prefix" class="el-input__icon el-icon-lock my-icon"></i>
           </el-input>
-          <el-checkbox v-model="checked" class="checkbox">1个月内免登录</el-checkbox>
-          <a href="#">忘记密码</a>
+<!--          <el-checkbox v-model="checked" class="checkbox">1个月内免登录</el-checkbox>-->
+<!--          <a href="#">忘记密码</a>-->
         </div>
         <!-- 2.3 提交-->
         <div slot="form-submit">
@@ -48,7 +48,7 @@ export default {
       username: '',
       password: '',
       checked: true,
-      title: '登录诊所管理系统',
+      title: '登录系统',
       //设置图片
       imageView: require('@/assets/image/login/login图标.svg'),
       fit: 'fill'

@@ -13,11 +13,14 @@
       <el-input placeholder="请重复密码" v-model="repeatPassword" show-password class="input">
         <i slot="prefix" class="el-input__icon el-icon-lock my-icon"></i>
       </el-input>
+      <el-input placeholder="请输入医生码" v-model="yourDoctorCode" class="input">
+        <i slot="prefix" class="el-input__icon el-icon-key my-icon"></i>
+      </el-input>
     </div>
     <!-- 2.3 提交-->
     <div slot="form-submit">
       <div>
-        <el-button type="primary" class="button">注册</el-button>
+        <el-button type="primary" class="button" @click="registerDoctor">注册</el-button>
       </div>
       <div>
         <el-button plain class="button" @click="userLogin">已有账号，去登录</el-button>
@@ -37,15 +40,24 @@ export default {
   },
   data() {
     return {
-      title: '申请诊所账号',
+      title: '申请医生账号',
       username: '',
       password: '',
-      repeatPassword: ''
+      repeatPassword: '',
+      doctorCode:'123456',
+      yourDoctorCode:'',
     }
   },
   methods: {
     userLogin() {
       this.$router.replace("/")
+    },
+    registerDoctor(){
+      if (this.doctorCode !== this.yourDoctorCode) {
+        this.$message.error("医生码错误")
+      }else {
+        // 注册逻辑
+      }
     }
   }
 }
