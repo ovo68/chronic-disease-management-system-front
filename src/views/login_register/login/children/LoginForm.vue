@@ -11,14 +11,14 @@
         <form-title :title="title" slot="form-title"></form-title>
         <!-- 2.2 内容-->
         <div slot="form-content">
-          <el-input v-model="username" placeholder="请输入用户名" class="input">
+          <el-input v-model="phone" placeholder="请输入登录账号" class="input">
             <i slot="prefix" class="el-input__icon el-icon-user-solid my-icon"></i>
           </el-input>
           <el-input v-model="password" placeholder="请输入密码" show-password class="input">
             <i slot="prefix" class="el-input__icon el-icon-lock my-icon"></i>
           </el-input>
-<!--          <el-checkbox v-model="checked" class="checkbox">1个月内免登录</el-checkbox>-->
-<!--          <a href="#">忘记密码</a>-->
+          <!--          <el-checkbox v-model="checked" class="checkbox">1个月内免登录</el-checkbox>-->
+          <!--          <a href="#">忘记密码</a>-->
         </div>
         <!-- 2.3 提交-->
         <div slot="form-submit">
@@ -37,6 +37,8 @@
 <script>
 import Form from "@/components/common/sn/form/Form";
 import FormTitle from "@/components/common/sn/form/FormTitle";
+import {post} from "@/api/request";
+
 
 export default {
   name: "LoginForm",
@@ -46,6 +48,7 @@ export default {
   data() {
     return {
       username: '',
+      phone: '',
       password: '',
       checked: true,
       title: '登录系统',
@@ -54,15 +57,33 @@ export default {
       fit: 'fill'
     }
   },
-  methods:{
-    registerUser(){
+  methods: {
+    registerUser() {
       this.$router.replace("/register")
     },
-    userLogin(){
+    userLogin() {
       // TODO 发送登录请求
+      if (this.password === '' || this.phone === '') {
+        this.$message.error("请输入完整输入账号和密码")
+        return
+      }
+      post("/index/login", {}, {
+        phone: this.phone,
+        password: this.password
+      }).then(data => {
+        if (data.code === 10001) {
+          console.log(data)
+          this.$message.success("登录成功")
+          this.$store.state.user = data.data
+          localStorage.setItem("user",data.data)
+          this.$store.commit(this.mutationsTypes.CHANGE_HOME_TITLE, '经营概况')
+          this.$router.replace("/manageConditionRoot")
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
 
-      this.$store.commit(this.mutationsTypes.CHANGE_HOME_TITLE,'经营概况')
-      this.$router.replace("/manageConditionRoot")
+
     }
   }
 }

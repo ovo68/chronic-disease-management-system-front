@@ -15,6 +15,7 @@ import ConditionSecondRow from "@/views/manage_condition/children/ConditionSecon
 import ConditionThirdRow from "@/views/manage_condition/children/ConditionThirdRow";
 
 import * as manageCondition from '@/api/manage_condition/manageCondition'
+import {get} from "@/api/request";
 
 export default {
   name: "ManageCondition",
@@ -69,12 +70,23 @@ export default {
         this.allOutpatientServiceRecord = res.data
       })
     },
+
+    initAllRegistrationInfoTableData() {
+      // TODO 发请求拿就诊病人数据数据
+      get("/doctor/allSick").then(data => {
+          // console.log(data)
+        if (data.code === 10001) {
+          this.allOutpatientServiceRecord = data.data
+        }
+      })
+    },
   },
   created() {
     //获取今日经营概况和会员消费占比
-    this.toGetTodayConditionAndVipPercent()
-    //获取门诊记录
-    this.toGetOutpatientServiceRecord()
+    // this.toGetTodayConditionAndVipPercent()
+    // TODO 获取门诊记录
+    // this.toGetOutpatientServiceRecord()
+    this.initAllRegistrationInfoTableData()
   }
 }
 </script>

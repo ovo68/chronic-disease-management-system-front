@@ -20,7 +20,7 @@ export default {
     toManageCondition() {
       this.$router.push('/manageConditionRoot')
     }
-  },
+  }
 }
 </script>
 

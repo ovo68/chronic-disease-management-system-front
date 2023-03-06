@@ -24,12 +24,13 @@
                   :visible.sync="centerDialogVisible"
                   width="30%"
                   center>
-                <el-input type="textarea" v-model="recommendation" maxlength="500"
+                <el-input type="textarea" v-model="recommendation.content" maxlength="500"
                           show-word-limit
                           resize="none"
                           :rows="5" class="textarea-box"></el-input>
                 <span slot="footer" class="dialog-footer">
-                  <el-button @click="()=>{this.centerDialogVisible = false;this.recommendation = null}">取 消</el-button>
+                  <el-button
+                      @click="()=>{this.centerDialogVisible = false;this.recommendation.content = ''}">取 消</el-button>
                   <el-button type="primary" @click="confirmSend">确 定</el-button>
                 </span>
               </el-dialog>
@@ -42,12 +43,16 @@
 </template>
 
 <script>
+import {post} from "@/api/request";
+
 export default {
   name: "HospitalRecommendations",
   data() {
     return {
       centerDialogVisible: false,
-      recommendation: '',
+      recommendation: {
+        content: ''
+      },
     }
   },
   methods: {
@@ -55,7 +60,18 @@ export default {
       this.centerDialogVisible = true
     },
     confirmSend() {
-
+      post("/recommendation/save", this.recommendation)
+          .then(data => {
+            if (data.code === 10001) {
+              this.$message.success("操作成功")
+              // 刷新意见列表？
+              //
+              this.recommendation.content = ''
+              this.centerDialogVisible = false
+            } else {
+              this.$message.error(data.msg)
+            }
+          })
     }
   }
 }

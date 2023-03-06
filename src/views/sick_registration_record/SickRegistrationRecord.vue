@@ -5,7 +5,7 @@
       <el-col :offset="4" :span="8" class="chart-left">
         <el-card class="" shadow="hover">
           <div slot="header" class="clearfix">
-            <el-tag>{{ record.date }}</el-tag>
+            <el-tag>{{ record.name }}</el-tag>
             <el-button @click="openDraw(record)" size="medium"
                        style="float: right;margin-top: 1px; padding: 5px 0; width: 120px" type="text">
               <span style="font-size: 8px">
@@ -22,24 +22,25 @@
         :direction="direction"
         :with-header="false">
       <el-descriptions class="margin-top" title="诊断详情" :column="1" border>
-        <el-descriptions-item label="医生">{{ currentRecord.doctor }}</el-descriptions-item>
-        <el-descriptions-item label="医嘱">{{ currentRecord.doctorAdvices }}</el-descriptions-item>
-        <el-descriptions-item label="处方">{{ currentRecord.useDrugInfo }}</el-descriptions-item>
+        <el-descriptions-item label="姓名">{{ currentRecord.name }}</el-descriptions-item>
+        <el-descriptions-item label="电话">{{ currentRecord.phone }}</el-descriptions-item>
+        <el-descriptions-item label="体检信息">{{ currentRecord.examInfo }}</el-descriptions-item>
+        <el-descriptions-item label="病史">{{ currentRecord.pastMedical }}</el-descriptions-item>
+        <el-descriptions-item label="医嘱">{{ currentRecord.doctorAdvice }}</el-descriptions-item>
+        <el-descriptions-item label="处方">{{ currentRecord.drugInfo }}</el-descriptions-item>
       </el-descriptions>
     </el-drawer>
   </div>
 </template>
 
 <script>
+import {get} from "@/api/request";
+
 export default {
   name: "SickRegistrationRecord",
   data() {
     return {
-      registrationRecordList: [
-        {doctor: '李医生', doctorAdvices: '多吃饭', useDrugInfo: '健胃消食片', date: '2023年3月4日'},
-        {doctor: '张医生', doctorAdvices: '早睡早起', useDrugInfo: '褪黑素', date: '2023年3月5日'},
-        {doctor: '王医生', doctorAdvices: '多运动', useDrugInfo: '维生素A', date: '2023年3月6日'},
-      ],
+      registrationRecordList: [],
       drawer: false,
       direction: 'rtl',
       currentRecord: {doctor: '', doctorAdvices: '', useDrugInfo: '', date: ''},
@@ -49,7 +50,27 @@ export default {
     openDraw(record) {
       this.currentRecord = record
       this.drawer = true
-    }
+    },
+    initData() {
+      let id
+      if (this.$store.state.user.id !== null) {
+        id = this.$store.state.user.id
+      } else {
+        id = JSON.parse(localStorage.getItem("user")).id
+      }
+      get(`/sick/${id}`)
+          .then(data => {
+            if (data.code === 10001) {
+              this.registrationRecordList = this.registrationRecordList.concat(data.data)
+            } else {
+              this.$message.error(data.msg)
+            }
+          })
+    },
+
+  },
+  created() {
+    this.initData()
   }
 }
 </script>

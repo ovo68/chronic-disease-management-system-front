@@ -24,9 +24,13 @@ export default {
     toHospitalRecommendations() {
       this.$router.push("/RecommendationRoot/HospitalRecommendations")
     },
-    toNewDrugVolunteer(){
+    toNewDrugVolunteer() {
       this.$router.push("/RecommendationRoot/NewDrugVolunteer")
     }
+  }
+  ,
+  mounted() {
+    this.$children[0].$parent = this.$parent
   }
 }
 </script>

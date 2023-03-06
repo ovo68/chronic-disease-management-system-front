@@ -150,11 +150,11 @@ export default {
   },
   created() {
     //获取所有的vip患者
-    this.toGetAllVipSicks()
+    // this.toGetAllVipSicks()
   },
   mounted() {
     //不显示诊断信息
-    this.notShowDiagnose()
+    // this.notShowDiagnose()
   }
 }
 </script>

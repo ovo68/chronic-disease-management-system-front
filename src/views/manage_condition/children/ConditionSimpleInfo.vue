@@ -7,11 +7,11 @@
       <el-row :gutter="10">
         <el-col :span="17">
           <div class="describe">{{ describe }}</div>
-          <div class="up-and-down-div">
-            <img class="up-and-down" :src="downSvg[infoIcon-1]" v-if="!isUp">
-            <img class="up-and-down" :src="upSvg[infoIcon-1]" v-if="isUp">
-            <span>{{ aboutCondition }}</span>
-          </div>
+<!--          <div class="up-and-down-div">-->
+<!--            <img class="up-and-down" :src="downSvg[infoIcon-1]" v-if="!isUp">-->
+<!--            <img class="up-and-down" :src="upSvg[infoIcon-1]" v-if="isUp">-->
+<!--            <span>{{ aboutCondition }}</span>-->
+<!--          </div>-->
         </el-col>
         <el-col :span="7">
           <sn-image-in-circle :circle-style="manageConditionIconBackgroundColor" :img-src="manageCondition[infoIcon-1]"/>
@@ -48,7 +48,7 @@ export default {
   },
   props: {
     cardTitle: {
-      type: Number,
+      type: [Number,String],
       default: 56
     },
     describe: {

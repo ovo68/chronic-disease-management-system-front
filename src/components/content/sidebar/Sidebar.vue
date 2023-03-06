@@ -3,43 +3,46 @@
     <div class="title-img-div">
       <el-image :src="image0" class="title-img"/>
     </div>
-    <el-menu default-active="1-4-1"
-             class="el-menu-vertical-demo no-back-color"
-             @open="handleOpen" @close="handleClose"
-             :collapse="isCollapse">
-      <!-- 1.经营概况-->
-      <sidebar-manage-condition/>
-      <!-- 2.工作台-->
-<!--      <sidebar-workspace/>-->
-      <!-- 3.新开就诊-->
-<!--      <sidebar-new-see-doctor/>-->
-      <!-- 4.挂号管理-->
-      <sidebar-registration-manage v-show="$store.state.user.role===1"/>
+    <div>
+      <el-menu class="el-menu-vertical-demo no-back-color"
+               @open="handleOpen" @close="handleClose"
+               :collapse="isCollapse">
+        <!-- 1.经营概况-->
+        <sidebar-manage-condition/>
+        <sidebar-registration-manage v-show="$store.state.user.role===1"/>
+        <side-bar-sick-registration-record v-show="$store.state.user.role===0"/>
+        <!--  TODO 加入社区模块    -->
+        <side-bar-community/>
+        <!--  医院建议    -->
+        <side-bar-recommendation/>
 
-<!-- 病人挂号记录     -->
-      <side-bar-sick-registration-record/>
+        <!-- 2.工作台-->
+        <!--      <sidebar-workspace/>-->
+        <!-- 3.新开就诊-->
+        <!--      <sidebar-new-see-doctor/>-->
+        <!-- 4.挂号管理-->
 
-      <!-- 5.药品零售-->
-<!--      <sidebar-drug-sale/>-->
-      <!-- 6.收费管理-->
-<!--      <sidebar-cost-manage/>-->
-      <!-- 7.患者管理-->
-<!--      <sidebar-sick-manage/>-->
-      <!-- 8.药品管理-->
-<!--      <sidebar-drug-manage/>-->
-      <!--  TODO 加入社区模块    -->
-      <side-bar-community/>
+        <!-- 病人挂号记录     -->
 
-<!--  医院建议    -->
-      <side-bar-recommendation/>
+        <!-- 5.药品零售-->
+        <!--      <sidebar-drug-sale/>-->
+        <!-- 6.收费管理-->
+        <!--      <sidebar-cost-manage/>-->
+        <!-- 7.患者管理-->
+        <!--      <sidebar-sick-manage/>-->
+        <!-- 8.药品管理-->
+        <!--      <sidebar-drug-manage/>-->
 
-      <!-- 9.会员管理-->
-<!--      <sidebar-vip-manage/>-->
-      <!-- 10.统计报表-->
-<!--      <sidebar-statistics-table/>-->
-      <!-- 11.系统设置-->
-<!--      <sidebar-system-setting/>-->
-    </el-menu>
+
+        <!-- 9.会员管理-->
+        <!--      <sidebar-vip-manage/>-->
+        <!-- 10.统计报表-->
+        <!--      <sidebar-statistics-table/>-->
+        <!-- 11.系统设置-->
+        <!--      <sidebar-system-setting/>-->
+      </el-menu>
+    </div>
+
   </div>
 </template>
 
@@ -117,5 +120,6 @@ export default {
     margin-top: 6px;
   }
 }
+
 
 </style>

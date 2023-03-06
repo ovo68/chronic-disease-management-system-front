@@ -27,7 +27,7 @@
         </sn-input-complex>
         <sn-select
             @selectChange="getSickGender"
-            :to-select="sick.gender.value"
+            :to-select="sick.sex.value"
             slot="three-col"
             :select-data="$store.state.gender"
             ref="gender">
@@ -35,7 +35,7 @@
         </sn-select>
         <sn-input
             @inputChange="getSickPhoneNumber"
-            :input-value-from-parent="sick.phoneNumber"
+            :input-value-from-parent="sick.phone"
             slot="four-col"
             ref="phoneNumber">
           <sn-must-text text="手机号码" slot="title"/>
@@ -44,32 +44,43 @@
 
       <sn-row-has-two-col class="margin-top-20">
         <sn-select-has-select
-            :select-value="sick.addressArray"
+            :select-value="sick.address"
             :options="$store.state.address"
             @selectChange="getAddress"
             slot="one-col">
           <sn-must-text text="地址" slot="title"/>
         </sn-select-has-select>
         <sn-input
-            :input-value-from-parent="sick.useDrugInfo"
+            :input-value-from-parent="sick.drugInfo"
             @inputChange="getUseDrugInfo"
             slot="two-col">
           <sn-must-text
               text="用药信息" slot="title"/>
         </sn-input>
       </sn-row-has-two-col>
-      <sn-row-has-two-col :left=12 :right=12>
+      <el-row style="margin-top: 10px">
+        <el-col :span="24">
+          <sn-input :input-value-from-parent="sick.pastMedical"
+                    @inputChange="getPastMedical">
+            <sn-must-text
+                text="过往病历" slot="title"/>
+          </sn-input>
+        </el-col>
+      </el-row>
+      <sn-row-has-two-col :left=12 :right=12 class="margin-top-20">
         <sn-input
-            :input-value-from-parent="sick.addressDetail"
-            @inputChange="getDetailAddress"
+            :input-value-from-parent="sick.examInfo"
+            @inputChange="getExamInfo"
             slot="one-col">
           <sn-must-text
               text="体检信息" slot="title"/>
         </sn-input>
-        <sn-select-create-item slot="two-col" @selectedChange="getDoctorAdvice"
-                               :options="$store.state.doctorAdviceData">
+        <sn-input
+            :input-value-from-parent="sick.doctorAdvice"
+            @inputChange="getDoctorAdvice"
+            slot="two-col">
           <sn-must-text text="医嘱" slot="title"/>
-        </sn-select-create-item>
+        </sn-input>
       </sn-row-has-two-col>
 
       <div class="to-flex" style="margin-top: 12px">
@@ -84,6 +95,8 @@
 </template>
 
 <script>
+import {post} from "@/api/request";
+
 export default {
   name: "PersonBaseInfo",
   data() {
@@ -92,17 +105,20 @@ export default {
       isShowDiagnose: true,
 
       sick: {
-        gender: {
+        sex: {
           value: 0,
           label: '男'
         },
-        addressArray: [],
+        address: [],
         name: '',
-        age: '',
-        phoneNumber: '',
-        useDrugInfo: '',
-        doctorAdvices: [],
+        age: 0,
+        phone: '',
+        drugInfo: '',
+        doctorAdvice: '',
         doctor: '',
+        pastMedical: '',
+        examInfo: '',
+        role: 0
       },
       titleStyle: {
         'color': '#21A3F1',
@@ -112,18 +128,52 @@ export default {
   },
   methods: {
     submitSickInfo() {
-      this.sick.doctor = this.$store.state.user.username
-      console.log(this.$refs.age);
-      console.log(this.sick);
-
+      // console.log(this.$refs.age);
+      let sickSave = JSON.parse(JSON.stringify(this.sick));
+      sickSave.address = sickSave.address.toString()
+      sickSave.doctorAdvice = sickSave.doctorAdvice.toString()
+      sickSave.sex = sickSave.sex.value
+      // console.log(sickSave)
+      // console.log(this.sick)
       //  TODO 发请求保存信息
+      post("/doctor/saveSick", sickSave)
+          .then(data => {
+            if (data.code === 10001) {
+              this.$message.success("添加成功")
+              this.sick = {
+                sex: {
+                  value: 1,
+                  label: '男'
+                },
+                address: [],
+                name: '',
+                age: 0,
+                phone: '',
+                drugInfo: '',
+                doctorAdvice: '',
+                pastMedical: '',
+                examInfo: '',
+                role: 0
+              }
+              // console.log(this.sick)
+            } else {
+              this.$message.error(data.msg)
+            }
+          })
+    },
+
+    getPastMedical(pastMedical) {
+      this.$set(this.sick, 'pastMedical', pastMedical)
     },
 
     getUseDrugInfo(drug) {
-      this.$set(this.sick, 'useDrugInfo', drug)
+      this.$set(this.sick, 'drugInfo', drug)
     },
     getDoctorAdvice(advices) {
-      this.$set(this.sick, 'doctorAdvices', advices)
+      this.$set(this.sick, 'doctorAdvice', advices)
+    },
+    getExamInfo(examInfo) {
+      this.$set(this.sick, 'examInfo', examInfo)
     },
 
 
@@ -145,11 +195,11 @@ export default {
     },
     //获取患者性别
     getSickGender(gender) {
-      this.$set(this.sick, 'gender', gender)
+      this.$set(this.sick, 'sex', gender)
     },
     //获取手机号码
-    getSickPhoneNumber(phoneNumber) {
-      this.$set(this.sick, 'phoneNumber', phoneNumber)
+    getSickPhoneNumber(phone) {
+      this.$set(this.sick, 'phone', phone)
     },
     //获取证件号码
     getIdCard(idCard) {
@@ -167,17 +217,7 @@ export default {
     },
     //获取地址
     getAddress(address) {
-      let addressString = ''
-      for (let i = 0; i < address.length; i++) {
-
-        if (i === address.length - 1) {
-          addressString += address[i]
-        } else {
-          addressString += address[i] + ','
-        }
-      }
-      this.$set(this.sick, 'addressArray', address)
-      this.$set(this.sick, 'address', addressString)
+      this.$set(this.sick, 'address', address)
     },
     //获取详细地址
     getDetailAddress(addressDetail) {

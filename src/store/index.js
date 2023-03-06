@@ -14,20 +14,15 @@ import dictionaryTableManage from '@/store/module/system_setting/dictionary_tabl
 Vue.use(Vuex)
 const state = {
   homeTitle: '',
-  user: {
-    id: '1',
-    username: "忆生",
-    // 角色  0 病人  ； 1 医生
-    role: 1
-  },
+  user: {},
   //性别
   gender: [
     {
-      value: 0,
+      value: 1,
       label: '男'
     },
     {
-      value: 1,
+      value: 0,
       label: '女'
     },
   ],

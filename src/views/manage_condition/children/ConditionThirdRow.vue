@@ -2,27 +2,35 @@
   <div class="third-row">
     <el-card class="box-card third-row-content">
       <div slot="header" class="clearfix">
-        <span>今日门诊记录</span>
+        <span>门诊记录</span>
       </div>
-      <el-table :data="sickData" stripe style="width: 100%"
+      <el-table :data="tableData" stripe style="width: 100%"
                 :header-cell-style="{'text-align':'center'}"
                 :cell-style="{'text-align':'center'}">
-        <el-table-column prop="id" label="序号"></el-table-column>
-        <!--        <el-table-column label="就诊状态">-->
-        <!--          <template slot-scope="scope">-->
-        <!--            <span class="status">-->
-        <!--              {{ scope.row.receptionStatus.description }}-->
-        <!--            </span>-->
-        <!--          </template>-->
-        <!--        </el-table-column>-->
-<!--        <el-table-column prop="sick.number" label="患者编号"/>-->
-        <el-table-column prop="name" label="患者姓名"/>
-        <el-table-column prop="sex" label="性别"/>
+        <el-table-column prop="id" label="序号"/>
+        <el-table-column prop="name" label="患者姓名">
+          <template slot-scope="scope">
+                      <span class="status">
+                        {{ scope.row.name.substring(0, 1) + "**" }}
+                      </span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="sex" label="性别">
+          <template slot-scope="scope">
+            <el-tag>{{ scope.row.sex === 1 ? "男" : "女" }}</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="age" label="年龄"/>
-        <el-table-column prop="phoneNumber" label="手机号码" width="110px"/>
+        <el-table-column prop="phone" label="手机号码" width="110">
+          <template slot-scope="scope">
+                      <span class="status">
+                        {{ scope.row.phone.substring(0, 3) + "****" }}
+                      </span>
+          </template>
+        </el-table-column>
         <!--        <el-table-column prop="registerType.description" label="门诊类型"/>-->
         <!--        <el-table-column prop="doctor.department.name" label="科室"/>-->
-        <el-table-column prop="doctor" label="医生"/>
+        <!--        <el-table-column prop="doctor" label="医生"/>-->
         <!--        <el-table-column prop="sick.updateTime" label="最后更新" width="100px"/>-->
       </el-table>
       <!-- 分页导航-->
@@ -32,15 +40,15 @@
       -->
       <!--      <sn-page :table-data="tableData" class="page" @getPageData="getPageData"/>-->
 
-      <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage"
-          :page-sizes="[5, 10, 15, 20]"
-          :page-size="100"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="sickData.length">
-      </el-pagination>
+<!--      <el-pagination-->
+<!--          @size-change="handleSizeChange"-->
+<!--          @current-change="handleCurrentChange"-->
+<!--          :current-page="currentPage"-->
+<!--          :page-sizes="[5, 10, 15, 20]"-->
+<!--          :page-size="100"-->
+<!--          layout="total, sizes, prev, pager, next, jumper"-->
+<!--          :total="sickData.length">-->
+<!--      </el-pagination>-->
     </el-card>
   </div>
 </template>
@@ -51,38 +59,10 @@ export default {
   data() {
     return {
       //每页数据
-      sickData: [
-        {
-          id: 1,
-          name: '陈平安',
-          sex: '男',
-          age: 12,
-          phoneNumber: '1333221231',
-          doctor: '宁姚',
-          meetDoctorDate: '1996-12-25 12:05:12',
-        },
-        {
-          id: 2,
-          name: '石昊',
-          sex: '男',
-          age: 33,
-          phoneNumber: '1345575676',
-          doctor: '王阳明',
-          meetDoctorDate: '1996-12-25 12:05:12',
-        },
-        {
-          id: 3,
-          name: '叶凡',
-          sex: '男',
-          age: 22,
-          phoneNumber: '1453345325',
-          doctor: '宁姚',
-          meetDoctorDate: '1996-12-25 12:05:12',
-        },
-      ],
+      sickData: [],
       currentPage: 1,
-      pageSize:5,
-      pageNumber:1
+      pageSize: 5,
+      pageNumber: 1
     }
   },
   props: {

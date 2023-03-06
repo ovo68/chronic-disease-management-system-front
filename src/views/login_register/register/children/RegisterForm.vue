@@ -7,6 +7,9 @@
       <el-input placeholder="请输入用户名" v-model="username" class="input">
         <i slot="prefix" class="el-input__icon el-icon-user-solid my-icon"></i>
       </el-input>
+      <el-input placeholder="请输入手机号" v-model="phone" class="input">
+        <i slot="prefix" class="el-input__icon el-icon-user-solid my-icon"></i>
+      </el-input>
       <el-input placeholder="请输入密码" v-model="password" show-password class="input">
         <i slot="prefix" class="el-input__icon el-icon-lock my-icon"></i>
       </el-input>
@@ -32,6 +35,8 @@
 <script>
 import Form from "@/components/common/sn/form/Form";
 import FormTitle from "@/components/common/sn/form/FormTitle";
+import {post} from "@/api/request";
+import axios from 'axios'
 
 export default {
   name: "RegisterForm",
@@ -41,22 +46,42 @@ export default {
   data() {
     return {
       title: '申请医生账号',
-      username: '',
-      password: '',
-      repeatPassword: '',
-      doctorCode:'123456',
-      yourDoctorCode:'',
+      username: '茶艺师',
+      phone: new Date().valueOf().toString().substring(2, 12),
+      password: '123',
+      repeatPassword: '123',
+      doctorCode: '123456',
+      yourDoctorCode: '',
     }
   },
   methods: {
     userLogin() {
       this.$router.replace("/")
     },
-    registerDoctor(){
+    registerDoctor() {
       if (this.doctorCode !== this.yourDoctorCode) {
         this.$message.error("医生码错误")
-      }else {
+      } else {
         // 注册逻辑
+        if (this.username === '' || this.phone === ''
+            || this.password === '' || this.repeatPassword === ''
+            || this.yourDoctorCode === '' || this.password !== this.repeatPassword) {
+          this.$message.error("请完整输入信息")
+          return
+        }
+
+        post("/doctor/register", {
+          name: this.username,
+          phone: this.phone,
+          password: this.password,
+        }).then(data => {
+          console.log(data)
+          if (data.code === 10001) {
+            this.$message.success("注册成功")
+          }else {
+            this.$message.error(data.msg)
+          }
+        })
       }
     }
   }
@@ -68,7 +93,7 @@ export default {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: #666 0 0 10px; //四周设置阴影
-  height: 656/1.25px;
+  height: 700/1.25px;
   width: 100%;
   box-sizing: border-box;
   padding-left: 400px;
@@ -88,12 +113,14 @@ export default {
   position: absolute;
   bottom: 7.5px;
 }
+
 .button {
   text-align: center;
   width: 346/1.25px;
   margin-bottom: 10px;
 }
-.title{
+
+.title {
   margin-bottom: 30px;
 }
 </style>

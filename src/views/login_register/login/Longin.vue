@@ -58,43 +58,43 @@ export default {
     ]),
   },
   created() {
-    this.asyncGetDiagnoseInfo(),
-    this.asyncGetMedicalAdviceInfo(),
-    this.asyncGetComplaintInfo(),
-    this.asyncGetPresentHistoryInfo(),
-    this.asyncGetAnamnesisInfo(),
-    this.asyncGetAllergiesInfo(),
-    this.asyncGetPersonalHistoryInfo(),
-    this.asyncGetAuxiliaryExamInfo(),
-    this.asyncGetTreatAdviceInfo(),
-    //药品信息
-    this.asyncGetDrugTypeInfo(),
-    this.asyncGetDrugFormInfo(),
-    this.asyncGetDrugUsageInfo(),
-    this.asyncGetFactoryInfo(),
-    this.asyncGetOutTypeInfo(),
-    this.asyncGetStockTypeInfo(),
-    this.asyncGetInvoiceInfo(),
-    this.asyncGetPackUnitInfo(),
-    //检查项目
-    this.asyncGetCheckItemType(),
-    this.asyncGetCheckItemUnit(),
-    //患者信息
-    this.asyncGetSickEducation(),
-    this.asyncGetSickJob(),
-    this.asyncGetSickOrigin(),
-    //项目检查设置
-    this.asyncGetCheckItemByNameAndCom(),
-    //供应商管理
-    this.asyncGetSupplierList(),
-    //附加费用
-    this.asyncGetAddtionCostByName(),
-    this.asyncGetTreatCostByName(),
-    this.asyncGetRegisterCostByName(),
-    //角色管理
-    this.asyncGetEmployeeByName(),
-    this.asyncGetDepartmentByName(),
-    this.asyncGetRoleByName()
+    // this.asyncGetDiagnoseInfo(),
+    // this.asyncGetMedicalAdviceInfo(),
+    // this.asyncGetComplaintInfo(),
+    // this.asyncGetPresentHistoryInfo(),
+    // this.asyncGetAnamnesisInfo(),
+    // this.asyncGetAllergiesInfo(),
+    // this.asyncGetPersonalHistoryInfo(),
+    // this.asyncGetAuxiliaryExamInfo(),
+    // this.asyncGetTreatAdviceInfo(),
+    // //药品信息
+    // this.asyncGetDrugTypeInfo(),
+    // this.asyncGetDrugFormInfo(),
+    // this.asyncGetDrugUsageInfo(),
+    // this.asyncGetFactoryInfo(),
+    // this.asyncGetOutTypeInfo(),
+    // this.asyncGetStockTypeInfo(),
+    // this.asyncGetInvoiceInfo(),
+    // this.asyncGetPackUnitInfo(),
+    // //检查项目
+    // this.asyncGetCheckItemType(),
+    // this.asyncGetCheckItemUnit(),
+    // //患者信息
+    // this.asyncGetSickEducation(),
+    // this.asyncGetSickJob(),
+    // this.asyncGetSickOrigin(),
+    // //项目检查设置
+    // this.asyncGetCheckItemByNameAndCom(),
+    // //供应商管理
+    // this.asyncGetSupplierList(),
+    // //附加费用
+    // this.asyncGetAddtionCostByName(),
+    // this.asyncGetTreatCostByName(),
+    // this.asyncGetRegisterCostByName(),
+    // //角色管理
+    // this.asyncGetEmployeeByName(),
+    // this.asyncGetDepartmentByName(),
+    // this.asyncGetRoleByName()
   }
 }
 </script>

@@ -1,15 +1,15 @@
 <template>
   <!-- 4.挂号管理-->
-  <el-submenu index="2">
-    <template slot="title">
-      <el-image :src="image4"/>
-    </template>
-    <el-menu-item-group>
-      <span slot="title" class="out-title">就诊管理</span>
-      <el-menu-item index="1-1" @click="toNewAddRegistration">新增就诊</el-menu-item>
-      <el-menu-item index="1-2" @click="toRegistrationRecord">就诊记录</el-menu-item>
-    </el-menu-item-group>
-  </el-submenu>
+    <el-submenu index="2">
+      <template slot="title">
+        <el-image :src="image4"/>
+      </template>
+      <el-menu-item-group>
+        <span slot="title" class="out-title">就诊管理</span>
+        <el-menu-item index="1-1" @click="toNewAddRegistration">新增就诊</el-menu-item>
+        <el-menu-item index="1-2" @click="toRegistrationRecord">就诊记录</el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
 </template>
 
 <script>
@@ -30,9 +30,9 @@ export default {
     toRegistrationRecord() {
       this.$router.push("/registrationManageRoot/registrationRecord")
     },
-    // props: {
-    //   isShow: Boolean
-    // }
+    mounted() {
+      this.$children[0].$parent = this.$parent
+    }
   }
 }
 </script>

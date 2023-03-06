@@ -50,7 +50,7 @@
         <div>
           <el-tag>您的回答</el-tag>
         </div>
-        <el-input type="textarea" v-model="needAnswerQuestionAnswer.answerContent" maxlength="500" show-word-limit
+        <el-input type="textarea" v-model="needAnswerQuestionAnswer.content" maxlength="500" show-word-limit
                   resize="none"
                   :rows="5" class="textarea-box"></el-input>
         <span slot="footer" class="dialog-footer">
@@ -100,7 +100,7 @@
           <el-collapse v-model="myAnswer" @change="handleChange">
             <el-collapse-item v-for="(answer,index) in this.questionAnswerList"
                               :title="answer.description" :name="index+1">
-              <div>{{ answer.answerContent }}</div>
+              <div>{{ answer.content }}</div>
             </el-collapse-item>
           </el-collapse>
         </el-card>
@@ -133,7 +133,7 @@
       <div>
         <el-tag>您的回答</el-tag>
       </div>
-      <el-input type="textarea" v-model="needAnswerQuestionAnswer.answerContent" maxlength="500" show-word-limit
+      <el-input type="textarea" v-model="needAnswerQuestionAnswer.content" maxlength="500" show-word-limit
                 resize="none"
                 :rows="5" class="textarea-box"></el-input>
       <span slot="footer" class="dialog-footer">
@@ -146,6 +146,8 @@
 </template>
 
 <script>
+import {get, post} from "@/api/request";
+
 export default {
   name: "DiseaseCommunication",
   data() {
@@ -185,7 +187,11 @@ export default {
       question: {description: '', user: ''},
       myAnswer: ['1'],
       needAnswerQuestion: null,
-      needAnswerQuestionAnswer: {questionId: '', description: '', answerContent: '', replyUserId: ''},
+      needAnswerQuestionAnswer: {
+        questionId: '',
+        description: '',
+        content: ''
+      },
     }
   },
   methods: {
@@ -196,6 +202,15 @@ export default {
     submitQuestion() {
       this.askQuestionsDialogVisible = false
       // 提交问题
+      post("/question/save", this.question).then(data => {
+        if (data.code === 10001) {
+          this.$message.success("操作成功")
+          // 刷新问题列表
+          this.initData()
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
 
       this.question = {description: '', user: ''}
 
@@ -206,12 +221,26 @@ export default {
     confirmReply() {
       this.centerDialogVisible = false
       this.needAnswerQuestion = null
-      this.needAnswerQuestionAnswer = {questionId: '', description: '', answerContent: '', replyUserId: ''}
+
+      post("/answer/save", this.needAnswerQuestionAnswer).then(data => {
+        if (data.code === 10001) {
+          this.$message.success("操作成功")
+          // 刷新问题列表
+          this.initData()
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+
+
+      this.needAnswerQuestionAnswer = {questionId: '', description: '', answerContent: ''}
     },
     handleClick(question) {
       this.needAnswerQuestion = question
-      this.needAnswerQuestionAnswer.questionId = this.needAnswerQuestion.questionId
+      this.needAnswerQuestionAnswer.questionId = this.needAnswerQuestion.id
+      this.needAnswerQuestionAnswer.description = this.needAnswerQuestion.description
       console.log(question)
+      console.log(this.needAnswerQuestionAnswer)
       this.centerDialogVisible = true
     },
     questionSearch() {
@@ -222,8 +251,29 @@ export default {
 
     },
     initData() {
+      get("/question/all").then(data => {
+        // console.log(data)
+        if (data.code === 10001) {
+          this.questionList = data.data
+          // 刷新问题列表
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
 
+      get("/answer/all").then(data => {
+        console.log(data)
+        if (data.code === 10001) {
+          this.questionAnswerList = data.data
+          // 刷新问题列表
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
     }
+  },
+  created() {
+    this.initData()
   }
 }
 </script>
